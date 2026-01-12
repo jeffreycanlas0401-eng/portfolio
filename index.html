@@ -4,54 +4,1211 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>JEFFREY CANLAS</title>
+    <title>JEFFREY CANLAS | Web Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+:root {
+  /* Light Theme - Slate & Gray */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --accent-color: #475569;
+  --accent-dark: #334155;
+  --accent-light: #64748b;
+  --card-shadow: 0 10px 25px rgba(71, 85, 105, 0.08);
+  --card-shadow-hover: 0 20px 40px rgba(71, 85, 105, 0.12);
+  --border-color: #cbd5e1;
+  --header-bg: #334155;
+  --footer-bg: #1e293b;
+  --button-primary: #475569;
+  --button-hover: #334155;
+  --button-shadow: #1e293b;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #171717;
+  --text-primary: #f5f5f5;
+  --text-secondary: #e5e5e5;
+  --text-muted: #a3a3a3;
+  --accent-color: #737373;
+  --accent-dark: #525252;
+  --accent-light: #a3a3a3;
+  --card-shadow: 0 10px 25px rgba(255, 255, 255, 0.05);
+  --card-shadow-hover: 0 20px 40px rgba(255, 255, 255, 0.1);
+  --border-color: #262626;
+  --header-bg: #171717;
+  --footer-bg: #0a0a0a;
+  --button-primary: #737373;
+  --button-hover: #525252;
+  --button-shadow: #404040;
+}
+
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and layout */
+body {
+    font-family: 'Fira Code', monospace;
+    line-height: 1.6;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    overflow-x: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Theme Toggle - Bottom Position */
+.theme-toggle {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.theme-toggle i {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+/* Header */
+header {
+    background-color: var(--header-bg);
+    color: white;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+header.scrolled {
+    padding: 0.5rem 0;
+    background-color: var(--header-bg);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+/* Mobile menu - Hidden on desktop, properly sized for mobile */
+.menu-icon {
+    display: none;
+    cursor: pointer;
+    color: white;
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1001;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/hero-bg.jpg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 0 2rem;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Solid Color Button Design */
+.hero .btn {
+    padding: 14px 35px;
+    background: var(--button-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    font-weight: bold;
+    display: inline-block;
+    opacity: 1;
+    transform: translateY(0);
+    border: none;
+    position: relative;
+    box-shadow: 
+        0 6px 0 var(--button-shadow),
+        0 8px 20px rgba(79, 70, 229, 0.3);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    overflow: hidden;
+}
+
+.hero .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.hero .btn:hover {
+    background: var(--button-hover);
+    transform: translateY(-3px);
+    box-shadow: 
+        0 8px 0 var(--button-shadow),
+        0 12px 25px rgba(79, 70, 229, 0.4);
+}
+
+.hero .btn:hover::before {
+    left: 100%;
+}
+
+.hero .btn:active {
+    transform: translateY(2px);
+    box-shadow: 
+        0 3px 0 var(--button-shadow),
+        0 4px 10px rgba(79, 70, 229, 0.2);
+}
+
+/* Sections */
+section {
+    padding: 100px 2rem;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+    color: var(--text-primary);
+}
+
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--accent-color);
+}
+
+/* About Section */
+.about {
+    background-color: var(--bg-secondary);
+}
+
+.about-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--bg-tertiary);
+    box-shadow: var(--card-shadow);
+}
+
+.bio {
+    flex: 1;
+}
+
+.bio h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.bio p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+/* Skills Section */
+.skills {
+    background-color: var(--bg-tertiary);
+}
+
+.skills-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+/* Animated Cards */
+.skill-category {
+    background-color: var(--bg-secondary);
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.5s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+    border: 1px solid var(--border-color);
+}
+
+.skill-category.visible {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+}
+
+.skill-category:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.skill-category h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    text-align: center;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.skill-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex-grow: 1;
+    align-content: flex-start;
+}
+
+/* Solid Color Skill Items */
+.skill-item {
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    position: relative;
+    transition: all 0.3s ease;
+    border: none;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+        0 3px 0 rgba(0, 0, 0, 0.2),
+        0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+}
+
+.skill-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 5px 0 rgba(0, 0, 0, 0.2),
+        0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.skill-item:active {
+    transform: translateY(1px);
+    box-shadow: 
+        0 2px 0 rgba(0, 0, 0, 0.2),
+        0 3px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Color coding for skills */
+.web-dev { 
+    background: #10b981;
+    color: white;
+}
+
+.productivity { 
+    background: #3b82f6;
+    color: white;
+}
+
+.design-ai { 
+    background: #8b5cf6;
+    color: white;
+}
+
+.hosting-tools { 
+    background: #f59e0b;
+    color: white;
+}
+
+/* Services Section */
+.services {
+    background-color: var(--bg-secondary);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Animated Service Cards with Icon Animations */
+.service-card {
+    background-color: var(--bg-secondary);
+    padding: 3rem 2rem;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    transition: all 0.5s ease;
+    border: 1px solid var(--border-color);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+}
+
+.service-card.visible {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+}
+
+.service-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--card-shadow-hover);
+}
+
+/* Icon Entrance Animation */
+.service-card i {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    transform: rotateY(0deg);
+    transition: all 0.6s ease;
+}
+
+.service-card.visible i {
+    animation: flipIn 0.8s ease forwards;
+}
+
+/* Icon Hover Vibration */
+.service-card:hover .fa-laptop-code {
+    animation: vibrate 0.3s ease infinite;
+}
+
+.service-card:hover .fa-code {
+    animation: vibrate 0.25s ease infinite;
+}
+
+.service-card:hover .fa-robot {
+    animation: vibrate 0.4s ease infinite;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.service-card p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Portfolio Section */
+.portfolio {
+    background-color: var(--bg-tertiary);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Animated Portfolio Cards */
+.portfolio-card {
+    background-color: var(--bg-secondary);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: all 0.5s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+    border: 1px solid var(--border-color);
+}
+
+.portfolio-card.visible {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+}
+
+.portfolio-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.portfolio-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.portfolio-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.portfolio-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.portfolio-content p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+/* Solid Color Portfolio Button */
+.portfolio-content .btn {
+    padding: 10px 20px;
+    background: var(--button-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    display: inline-block;
+    text-align: center;
+    border: none;
+    position: relative;
+    box-shadow: 
+        0 3px 0 var(--button-shadow);
+    font-weight: bold;
+}
+
+.portfolio-content .btn:hover {
+    background: var(--button-hover);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 5px 0 var(--button-shadow);
+}
+
+.portfolio-content .btn:active {
+    transform: translateY(1px);
+    box-shadow: 
+        0 2px 0 var(--button-shadow);
+}
+
+/* Fab Icons Section */
+.fab-projects {
+    background-color: var(--bg-secondary);
+    padding: 80px 2rem;
+}
+
+.fab-container {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.fab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 150px;
+}
+
+/* Solid Color Fab Icons */
+.fab-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--button-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    box-shadow: 
+        0 4px 0 var(--button-shadow);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+}
+
+.fab-icon.visible {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+}
+
+.fab-icon:hover {
+    background: var(--button-hover);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 6px 0 var(--button-shadow);
+}
+
+.fab-icon:active {
+    transform: translateY(1px) scale(1);
+    box-shadow: 
+        0 2px 0 var(--button-shadow);
+}
+
+.fab-icon i {
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.fab-item p {
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.modal-content {
+    background-color: var(--bg-secondary);
+    margin: 50px auto;
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 900px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.modal.active .modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    background: none;
+    border: none;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.close-modal:hover {
+    color: var(--accent-color);
+    background-color: var(--bg-tertiary);
+    transform: rotate(90deg);
+}
+
+.modal-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.modal-header h2 {
+    font-size: 2.2rem;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.modal-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.modal-img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Video Styling for AI Animation Modal */
+.modal-video {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    background: #000;
+}
+
+.modal-description {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    text-align: justify;
+}
+
+.modal-description p {
+    margin-bottom: 1.5rem;
+}
+
+.modal-features {
+    background: var(--bg-tertiary);
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+}
+
+.modal-features h4 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.modal-features ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.modal-features li {
+    padding: 0.5rem 0;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.modal-features li::before {
+    content: '▸';
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.modal-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+/* Solid Color Tech Tags */
+.tech-tag {
+    background: var(--button-primary);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    box-shadow: 0 4px 0 var(--button-shadow);
+    transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+    background: var(--button-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 var(--button-shadow);
+}
+
+/* Contact Section */
+.contact {
+    background-color: var(--header-bg);
+    color: white;
+}
+
+.contact-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+/* Solid Color Contact Items */
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: white;
+    background: var(--button-primary);
+    padding: 12px 25px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 
+        0 3px 0 var(--button-shadow);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    word-break: break-word;
+    max-width: 100%;
+}
+
+.contact-item.email-item {
+    font-size: 1rem;
+    padding: 12px 20px;
+}
+
+.contact-item:hover {
+    background: var(--button-hover);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 5px 0 var(--button-shadow);
+}
+
+.contact-item:active {
+    transform: translateY(1px);
+    box-shadow: 
+        0 2px 0 var(--button-shadow);
+}
+
+.contact-item i {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+/* Footer */
+footer {
+    background-color: var(--footer-bg);
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+}
+
+footer p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Background Animation */
+.bg {
+    animation: slide 3s ease-in-out infinite alternate;
+    background-image: linear-gradient(-60deg, var(--accent-color) 50%, var(--accent-light) 50%);
+    bottom: 0;
+    left: -50%;
+    opacity: .5;
+    position: fixed;
+    right: -50%;
+    top: 0;
+    z-index: -1;
+}
+
+.bg2 {
+    animation-direction: alternate-reverse;
+    animation-duration: 4s;
+}
+
+.bg3 {
+    animation-duration: 5s;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(-25%);
+    }
+    100% {
+        transform: translateX(25%);
+    }
+}
+
+/* New Animations */
+@keyframes flipIn {
+    0% {
+        transform: rotateY(90deg);
+        opacity: 0;
+    }
+    100% {
+        transform: rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes vibrate {
+    0%, 100% {
+        transform: translateX(0) rotate(0deg);
+    }
+    25% {
+        transform: translateX(-2px) rotate(-1deg);
+    }
+    50% {
+        transform: translateX(2px) rotate(1deg);
+    }
+    75% {
+        transform: translateX(-1px) rotate(-0.5deg);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .services-grid,
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .theme-toggle {
+        bottom: 25px;
+        right: 25px;
+        width: 55px;
+        height: 55px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-icon {
+        display: flex;
+        z-index: 1000;
+        position: absolute;
+        right: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.4rem;
+        width: 35px;
+        height: 35px;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        padding: 0;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(45, 55, 72, 0.95);
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        z-index: 999;
+        pointer-events: none;
+    }
+
+    .nav-links.active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: all;
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .skills-grid,
+    .services-grid,
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .contact-item {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+
+    .contact-item.email-item {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+        word-break: break-all;
+    }
+
+    .fab-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .fab-item {
+        width: 120px;
+    }
+
+    .fab-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .fab-icon i {
+        font-size: 1.8rem;
+    }
+
+    .theme-toggle {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .modal-content {
+        padding: 25px;
+        margin: 20px auto;
+    }
+
+    .modal-header h2 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-icon {
+        font-size: 1.3rem;
+        width: 32px;
+        height: 32px;
+        right: 1rem;
+    }
+
+    .contact-item.email-item {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+    }
+    
+    .hero .btn {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+
+    .modal-header h2 {
+        font-size: 1.6rem;
+    }
+
+    .modal-description {
+        font-size: 1rem;
+    }
+
+    .theme-toggle {
+        bottom: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+}
+    </style>
   </head>
   <body>
-    <header>
+    <!-- Theme Toggle - Bottom Position -->
+    <div class="theme-toggle" id="themeToggle">
+      <i class="fas fa-moon"></i>
+    </div>
+    
+    <header id="header">
       <nav>
-        <!--  <div class="logo">Your Logo</div> -->
         <ul class="nav-links">
-          <li>
-            <a href="#home">Home</a>
-          </li>
-          <li>
-            <a href="#about">About</a>
-          </li>
-          <li>
-            <a href="#services">Services</a>
-          </li>
-          <li>
-            <a href="#portfolio">Portfolio</a>
-          </li>
-          <li>
-            <a href="#contact">Contact</a>
-          </li>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+        <!--  <li><a href="#fab-projects">Projects</a></li> -->
+          <li><a href="#contact">Contact</a></li>
         </ul>
-        <div class="menu-icon" id="menu-icon"> &#9776;
-          <!-- Hamburger icon -->
-        </div>
+        <div class="menu-icon" id="menu-icon">&#9776;</div>
       </nav>
     </header>
     
-	
-	<div class="bg"></div>
+    <div class="bg"></div>
     <div class="bg bg2"></div>
     <div class="bg bg3"></div>
-	
-	
-	<section id="home" class="hero">
+    
+    <section id="home" class="hero">
       <div class="hero-content">
-        <h1>Welcome to My Professional Portfolio</h1>
-        <p>Explore my work, skills, and services</p>
+        <h1>JEFFREY CANLAS</h1>
+        <p>Web Developer & Digital Creator</p>
+        <p>Building modern, responsive websites with clean code and AI-powered efficiency</p>
         <br>
-        <a href="#about" class="btn">Let's Go!</a>
+        <a href="#portfolio" class="btn">View My Work</a>
       </div>
     </section>
-	
-	
-	
+    
     <section id="about" class="about">
       <div class="section-header">
         <h2>About Me</h2>
@@ -59,75 +1216,644 @@
       <div class="about-content">
         <img src="assets/images/my-pic.jpg" alt="JEFFREY CANLAS" class="profile-img">
         <div class="bio">
-          <h3>JEFFREY CANLAS</h3>
-          <p>I'm a passionate web developer with expertise in frontend and backend technologies. I design clean, functional websites that deliver seamless user experiences. </p>
+          <h3>Hello, I'm Jeffrey</h3>
+          <p>I'm a passionate web developer with expertise in frontend and backend technologies. I specialize in creating clean, functional websites that deliver exceptional user experiences.</p>
+          <p>With proficiency in <strong>PHP, HTML, CSS, and JavaScript</strong>, I build robust web solutions tailored to client needs. I leverage <strong>AI tools</strong> to streamline my workflow, ensuring faster delivery without compromising quality.</p>
+          <p>My approach combines technical expertise with creative problem-solving to deliver digital solutions that exceed expectations.</p>
         </div>
       </div>
     </section>
-	
-	
-	
+    
+    <section id="skills" class="skills">
+      <div class="section-header">
+        <h2>Technical Skills</h2>
+      </div>
+      <div class="skills-content">
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>Web Development</h3>
+            <div class="skill-items">
+              <span class="skill-item web-dev">PHP</span>
+              <span class="skill-item web-dev">HTML5</span>
+              <span class="skill-item web-dev">CSS3</span>
+              <span class="skill-item web-dev">JavaScript</span>
+              <span class="skill-item web-dev">Responsive Design</span>
+             <span class="skill-item web-dev">mySQL</span>
+            <!--  <span class="skill-item web-dev">jQuery</span> -->
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Productivity Tools</h3>
+            <div class="skill-items">
+              <span class="skill-item productivity">MS Excel</span>
+              <span class="skill-item productivity">MS PowerPoint</span>
+              <span class="skill-item productivity">MS Word</span>
+              <span class="skill-item productivity">Google Sheets</span>
+              <span class="skill-item productivity">Google Docs</span>
+            <!--  <span class="skill-item productivity">Trello</span> -->
+              <span class="skill-item productivity">Slack</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Design & AI Tools</h3>
+            <div class="skill-items">
+              <span class="skill-item design-ai">Adobe Photoshop</span>
+              <span class="skill-item design-ai">Hailuo</span>
+              <span class="skill-item design-ai">ChatGPT</span>
+              <span class="skill-item design-ai">Gemini</span>
+              <span class="skill-item design-ai">Canva</span>
+              <span class="skill-item design-ai">Deepseek</span>
+             <span class="skill-item design-ai">Cyberlink Power Director</span>
+            </div>
+          </div>
+          <!-- New Hosting & Tools Category -->
+          <div class="skill-category">
+            <h3>Hosting & Tools</h3>
+            <div class="skill-items">
+              <span class="skill-item hosting-tools">Hostinger</span>
+              <span class="skill-item hosting-tools">GoDaddy</span>
+              <span class="skill-item hosting-tools">phpMyAdmin</span>
+			  <span class="skill-item hosting-tools">cPanel</span>
+			  <span class="skill-item hosting-tools">hPanel</span>
+              <span class="skill-item hosting-tools">GitHub</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
     <section id="services" class="services">
       <div class="section-header">
         <h2>Services</h2>
       </div>
-      <div class="services-list">
-        <div class="service-item">
+      <div class="services-grid">
+        <div class="service-card">
+          <i class="fas fa-laptop-code"></i>
           <h3>Web Design</h3>
-          <p>Crafting responsive and user-friendly websites tailored to your needs.</p>
+          <p>Crafting responsive and user-friendly websites with modern design principles and optimal user experience.</p>
         </div>
-        <div class="service-item">
-          <h3>Development</h3>
-          <p>Building robust and scalable websites using modern web technologies.</p>
+        <div class="service-card">
+          <i class="fas fa-code"></i>
+          <h3>Web Development</h3>
+          <p>Building robust and scalable websites using PHP, HTML, CSS, and JavaScript with clean, maintainable code.</p>
         </div>
-        <div class="service-item">
-          <h3>SEO Optimization</h3>
-          <p>Improving website performance and visibility to attract more traffic.</p>
+        <div class="service-card">
+          <i class="fas fa-robot"></i>
+          <h3>AI Animation</h3>
+          <p>Creating engaging animations using AI-powered tools to bring your content to life with modern visual effects.</p>
         </div>
       </div>
     </section>
-	
-	
-	
+    
     <section id="portfolio" class="portfolio">
       <div class="section-header">
         <h2>Portfolio</h2>
       </div>
-      <div class="portfolio-gallery">
-        <div class="portfolio-item">
-          <img src="assets/images/project1.png" alt="Project 1">
-          <p>NEXUS WAVE GLOBAL</p>
-          <p>nexuswaveglobal.com</p>
+      <div class="portfolio-grid">
+        <div class="portfolio-card">
+          <img src="assets/images/project1.png" alt="NEXUS WAVE GLOBAL" class="portfolio-img">
+          <div class="portfolio-content">
+            <h3>NEXUS WAVE GLOBAL</h3>
+            <p>A comprehensive business website with modern design and responsive layout.</p>
+            <a href="https://jeffreycanlas0401-eng.github.io/nwg/" class="btn see-more" data-project="project1">See More</a>
+          </div>
         </div>
-        <!--   <div class="portfolio-item"><img src="project2.jpg" alt="Project 2"><p>Project 2</p></div><div class="portfolio-item"><img src="project3.jpg" alt="Project 3"><p>Project 3</p></div>
-			-->
+        <div class="portfolio-card">
+          <img src="assets/images/project2.png" alt="PrimeTalk Academy" class="portfolio-img">
+          <div class="portfolio-content">
+            <h3>PRIMETALK ACADEMY</h3>
+            <p>Educational platform with interactive features and engaging user interface.</p>
+            <a href="primetalkacademy.com" class="btn see-more" data-project="project2">See More</a>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <img src="assets/images/project3.png" alt="AI Animation" class="portfolio-img">
+          <div class="portfolio-content">
+            <h3>AI ANIMATION PROJECTS</h3>
+            <p>Various animation projects created using AI-powered tools and techniques.</p>
+            <a href="#" class="btn see-more" data-project="project3">See More</a>
+          </div>
+        </div>
+		 <div class="portfolio-card">
+          <img src="assets/images/project6.png" alt="JK Car Detailing" class="portfolio-img">
+          <div class="portfolio-content">
+            <h3>JK CAR DETAILING</h3>
+            <p>Car Detailing Services in Virginia USA</p>
+            <a href="https://jeffreycanlas0401-eng.github.io/car-detailing" class="btn see-more" data-project="project6">See More</a>
+          </div>
+        </div>
+		<div class="portfolio-card">
+          <img src="assets/images/project7.png" alt="Touch Of Gold" class="portfolio-img">
+          <div class="portfolio-content">
+            <h3>TOUCH OF GOLD</h3>
+            <p>Hair and Beauty Spa & Salon Balagtas & Bocaue, Bulacan</p>
+            <a href="https://jeffreycanlas0401-eng.github.io/tog" class="btn see-more" data-project="project7">See More</a>
+          </div>
+        </div>
       </div>
     </section>
+    
+   <!-- <section id="fab-projects" class="fab-projects">
+      <div class="section-header">
+        <h2>Interactive Projects</h2>
+      </div>
+      <div class="fab-container">
+        <div class="fab-item">
+          <div class="fab-icon" data-project="project4">
+            <i class="fas fa-music"></i>
+          </div>
+          <p>Music Player</p>
+        </div>
+        <div class="fab-item">
+          <div class="fab-icon" data-project="project5">
+            <i class="fas fa-gamepad"></i>
+          </div>
+          <p>Memory Card Game</p>
+        </div>
+      </div>
+    </section>
+	-->
+    
+    <!-- Project Modals -->
+    <div id="modal-project1" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-header">
+          <h2>NEXUS WAVE GLOBAL</h2>
+          <p class="modal-subtitle">Business Website Development</p>
+        </div>
+        <div class="modal-body">
+          <img src="assets/images/project1.png" alt="NEXUS WAVE GLOBAL" class="modal-img">
+          <div class="modal-description">
+            <p>Nexus Wave Global is a comprehensive business website designed to showcase the company's services and establish a strong online presence. The website features a modern, responsive design that works seamlessly across all devices.</p>
+            
+            <div class="modal-features">
+              <h4>Key Features</h4>
+              <ul>
+                <li>Responsive design optimized for mobile, tablet, and desktop</li>
+                <li>Clean, professional layout that reflects the company's brand</li>
+                <li>Service showcase with detailed descriptions</li>
+                <li>Contact form with validation and spam protection</li>
+                <li>Fast loading times and optimized performance</li>
+                <li>SEO-friendly structure for better search engine visibility</li>
+              </ul>
+            </div>
+            
+            <p>The project involved close collaboration with the client to understand their business needs and translate them into a digital solution that effectively communicates their value proposition to potential customers.</p>
+            
+            <div class="modal-tech">
+              <span class="tech-tag">HTML5</span>
+              <span class="tech-tag">CSS3</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">PHP</span>
+              <span class="tech-tag">Responsive Design</span>
+              <!-- <span class="tech-tag">SEO Optimization</span> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="modal-project2" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-header">
+          <h2>PRIMETALK ACADEMY</h2>
+          <p class="modal-subtitle">Educational Platform</p>
+        </div>
+        <div class="modal-body">
+          <img src="assets/images/project2.png" alt="PrimeTalk Academy" class="modal-img">
+          <div class="modal-description">
+            <p>PrimeTalk Academy is an educational platform designed to provide engaging learning experiences for students of all ages. The website features a clean, intuitive interface that makes navigation simple for both students and instructors.</p>
+            
+            <div class="modal-features">
+              <h4>Key Features</h4>
+              <ul>
+                <li>Course catalog with advanced filtering and search options</li>
+                <li>Student dashboard for progress tracking and achievement badges</li>
+                <li>Interactive lessons with multimedia content and quizzes</li>
+                <li>AI-powered animations for enhanced learning engagement</li>
+                <li>Secure user authentication and role-based access</li>
+                <li>Real-time chat and discussion forums</li>
+              </ul>
+            </div>
+            
+            <p>This project required implementing complex user management systems while maintaining an intuitive user experience. The integration of AI animations helps keep students engaged throughout their learning journey.</p>
+            
+            <div class="modal-tech">
+              <span class="tech-tag">HTML5</span>
+              <span class="tech-tag">CSS3</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">PHP</span>
+              <span class="tech-tag">MySQL</span>
+              <span class="tech-tag">AI Animation</span>
+              <span class="tech-tag">User Authentication</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="modal-project3" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-header">
+          <h2>AI ANIMATION PROJECTS</h2>
+          <p class="modal-subtitle">Creative Visual Solutions</p>
+        </div>
+        <div class="modal-body">
+          <video class="modal-video" controls>
+            <source src="assets/videos/project3.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="modal-description">
+            <p>This collection showcases various animation projects created using AI-powered tools and techniques. These animations bring content to life with modern visual effects and engaging motion graphics that capture audience attention.</p>
+            
+            <div class="modal-features">
+              <h4>Animation Capabilities</h4>
+              <ul>
+                <li>Character animations with natural movements and expressions</li>
+                <li>Dynamic transitions and visual effects for enhanced storytelling</li>
+                <li>Custom animations tailored to specific brand identities</li>
+                <li>Optimized for web performance with minimal loading times</li>
+                <li>Cross-browser compatibility ensuring consistent experience</li>
+                <li>Integration with existing websites and applications</li>
+              </ul>
+            </div>
+            
+            <p>Using AI tools allows for more efficient animation workflows while maintaining high-quality results. These animations can be used for educational content, marketing materials, product demonstrations, and interactive experiences.</p>
+            
+            <div class="modal-tech">
+              <span class="tech-tag">ChatGPT</span>
+              <span class="tech-tag">Hailuo</span>
+              <span class="tech-tag">Power Director</span>
+              <span class="tech-tag">Adobe Photoshop</span>
+              <span class="tech-tag">Audacity</span>
+              <span class="tech-tag">Canva</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="modal-project4" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-header">
+          <h2>MUSIC PLAYER</h2>
+          <p class="modal-subtitle">Interactive Web Application</p>
+        </div>
+        <div class="modal-body">
+          <img src="assets/images/music-player.png" alt="Music Player" class="modal-img">
+          <div class="modal-description">
+            <p>This interactive web-based music player offers a seamless listening experience with a modern, visually appealing interface. The player includes advanced features typically found in desktop applications, all accessible through a responsive web interface.</p>
+            
+            <div class="modal-features">
+              <h4>Player Features</h4>
+              <ul>
+                <li>Playlist creation and management with drag-and-drop functionality</li>
+                <li>Audio visualization with dynamic effects and spectrum analysis</li>
+                <li>Comprehensive playback controls (play, pause, skip, shuffle, repeat)</li>
+                <li>Advanced volume control and equalizer settings</li>
+                <li>Responsive design that works perfectly on all devices</li>
+                <li>Local storage for preferences and playlists</li>
+              </ul>
+            </div>
+            
+            <p>The music player was built with a focus on user experience, ensuring that all controls are intuitive and accessible. The visual design complements the functional aspects, creating an enjoyable environment for music listening.</p>
+            
+            <div class="modal-tech">
+              <span class="tech-tag">HTML5</span>
+              <span class="tech-tag">CSS3</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">Web Audio API</span>
+              <span class="tech-tag">Responsive Design</span>
+              <span class="tech-tag">Local Storage</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="modal-project5" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-header">
+          <h2>MEMORY CARD GAME</h2>
+          <p class="modal-subtitle">Interactive Gaming Experience</p>
+        </div>
+        <div class="modal-body">
+          <img src="assets/images/memory-game.png" alt="Memory Card Game" class="modal-img">
+          <div class="modal-description">
+            <p>This interactive memory card game challenges players to match pairs of cards while tracking their progress. The game features multiple difficulty levels and an engaging visual design that makes it enjoyable for users of all ages.</p>
+            
+            <div class="modal-features">
+              <h4>Game Features</h4>
+              <ul>
+                <li>Multiple difficulty levels (easy, medium, hard) with varying card counts</li>
+                <li>Comprehensive score tracking and countdown timer</li>
+                <li>Visual and sound feedback for correct and incorrect matches</li>
+                <li>Fully responsive design that works on all screen sizes</li>
+                <li>Local storage for high scores and game preferences</li>
+                <li>Progressive difficulty that adapts to player skill level</li>
+              </ul>
+            </div>
+            
+            <p>The game was designed with accessibility in mind, ensuring that color choices and interactions are clear and distinguishable. The smooth animations and responsive feedback create an engaging experience that encourages repeated play.</p>
+            
+            <div class="modal-tech">
+              <span class="tech-tag">HTML5</span>
+              <span class="tech-tag">CSS3</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">Local Storage API</span>
+              <span class="tech-tag">CSS Animations</span>
+              <span class="tech-tag">Game Logic</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 	
-	
-	
-	
-    <section id= "contact" class="contact">
+<div id="modal-project6" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+
+    <div class="modal-header">
+      <h2>JK Home Car Detailing Services</h2>
+      <p class="modal-subtitle">Portfolio Website Project</p>
+    </div>
+
+    <div class="modal-body">
+      <img src="assets/images/project6.png" alt="JK Home Car Detailing Services Website" class="modal-img">
+
+      <div class="modal-description">
+        <p>
+          This project is a portfolio website created for JK Home Car Detailing Services, a mobile auto detailing business based in Virginia, USA. The objective of this project was to design and develop a modern, responsive website that clearly presents service information and supports online visibility.
+        </p>
+
+        <div class="modal-features">
+          <h4>Project Highlights</h4>
+          <ul>
+            <li>Responsive layout optimized for mobile and desktop screens</li>
+            <li>Clear content structure for services and business details</li>
+            <li>Mobile-first design approach for better usability</li>
+            <li>Clean UI layout focused on readability and accessibility</li>
+            <li>Scalable structure for future feature expansion</li>
+          </ul>
+        </div>
+
+        <p>
+          This project highlights my ability to build business-oriented websites with a strong focus on user experience, clean design, and maintainable code. It demonstrates practical application of both front-end and back-end development fundamentals.
+        </p>
+
+        <div class="modal-tech">
+          <span class="tech-tag">HTML5</span>
+          <span class="tech-tag">CSS3</span>
+          <span class="tech-tag">PHP</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">Responsive Design</span>
+          <span class="tech-tag">UI/UX Layout</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+	<div id="modal-project7" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+
+    <div class="modal-header">
+      <h2>Touch of Gold Hair and Spa Salon</h2>
+      <p class="modal-subtitle">Portfolio Website Project</p>
+    </div>
+
+    <div class="modal-body">
+      <img src="assets/images/project7.png" alt="Touch of Gold Hair and Spa Salon Website" class="modal-img">
+
+      <div class="modal-description">
+        <p>
+          This project is a portfolio website created for Touch of Gold Hair and Spa Salon, a local business located in Bocaue and Balagtas, Bulacan. The goal of this project was to design and develop a clean, responsive, and user-friendly website that presents business information in a clear and organized way.
+        </p>
+
+        <div class="modal-features">
+          <h4>Project Highlights</h4>
+          <ul>
+            <li>Responsive layout optimized for desktop and mobile devices</li>
+            <li>Clean and structured page sections for services and business details</li>
+            <li>Simple navigation for improved user experience</li>
+            <li>Reusable components for easy content updates</li>
+            <li>Portfolio-focused design emphasizing clarity and readability</li>
+          </ul>
+        </div>
+
+        <p>
+          This project demonstrates my ability to translate a small business concept into a functional website layout while applying front-end and back-end development fundamentals. The design focuses on simplicity, accessibility, and maintainable code structure.
+        </p>
+
+        <div class="modal-tech">
+          <span class="tech-tag">HTML5</span>
+          <span class="tech-tag">CSS3</span>
+          <span class="tech-tag">PHP</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">Responsive Design</span>
+          <span class="tech-tag">UI Layout</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    
+    <section id="contact" class="contact">
       <div class="section-header">
         <h2>Contact Me</h2>
       </div>
-      <div class="contact-links">
-    <!--    <a href="#" onClick="MyWindow=window.open('https://mail.google.com/mail/?view=cm&fs=1&to=jeffreycanlas0401@gmail.com&su=INQUIRY&body=Your Message Here...','MyWindow','width=600,height=600,top=250,left=650' class="contact-item">
-          <img src="assets/images/email-icon.png" alt="Email"> jeffreycanlas0401@gmail.com </a> -->
-		  
-		     <a href="#" onClick="MyWindow=window.open('https://mail.google.com/mail/?view=cm&fs=1&to=jeffreycanlas0401@gmail.com&su=INQUIRY&body=Your Message Here...','MyWindow','width=600,height=600,top=250,left=650'); return false;" target="_blank" class="contact-item">
-          <img src="assets/images/email-icon.png" alt="Facebook"> jeffreycanlas0401@gmail.com </a>
-        <a href="https://www.facebook.com/jeffrey.canlas.733/" target="_blank" class="contact-item">
-          <img src="assets/images/facebook-icon.png" alt="Facebook"> Facebook </a>
-      <!--  <a href="https://www.twitter.com/yourprofile" target="_blank" class="contact-item">
-          <img src="twitter-icon.png" alt="Twitter"> Twitter </a> -->
-        <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="contact-item">
-          <img src="assets/images/linkedin-icon.png" alt="LinkedIn"> LinkedIn </a>
+      <div class="contact-content">
+        <p>Let's work together to bring your ideas to life</p>
+        <div class="contact-links">
+          <a href="#" onClick="MyWindow=window.open('https://mail.google.com/mail/?view=cm&fs=1&to=jeffreycanlas0401@gmail.com&su=INQUIRY&body=Your Message Here...','MyWindow','width=600,height=600,top=250,left=650'); return false;" target="_blank" class="contact-item email-item">
+            <i class="fas fa-envelope"></i> jeffreycanlas0401@gmail.com
+          </a>
+          <a href="https://www.facebook.com/jeffrey.canlas.733/" target="_blank" class="contact-item">
+            <i class="fab fa-facebook"></i> Facebook
+          </a>
+          <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="contact-item">
+            <i class="fab fa-linkedin"></i> LinkedIn
+          </a>
+          <!-- New Telegram Contact -->
+          <a href="https://t.me/super_jc" target="_blank" class="contact-item">
+            <i class="fab fa-telegram"></i> Telegram
+          </a>
+        </div>
       </div>
     </section>
+    
     <footer>
-      <p>&copy; 2025 | All Rights Reserved</p>
+      <p>&copy; 2025 Jeffrey Canlas | All Rights Reserved</p>
     </footer>
-    <script src="scripts.js"></script>
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    // Check for saved theme or prefer color scheme
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+    
+    themeToggle.addEventListener('click', function() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+    });
+    
+    function updateThemeIcon(theme) {
+        if (theme === 'dark') {
+            themeIcon.className = 'fas fa-sun';
+        } else {
+            themeIcon.className = 'fas fa-moon';
+        }
+    }
+
+    // Mobile menu functionality
+    const menuIcon = document.querySelector(".menu-icon");
+    const navLinks = document.querySelector(".nav-links");
+    const navItems = document.querySelectorAll(".nav-links a");
+    
+    // Function to handle hamburger icon visibility
+    function handleHamburgerVisibility() {
+        if (window.innerWidth <= 768) {
+            // Show hamburger icon on mobile
+            menuIcon.style.display = 'flex';
+        } else {
+            // Hide hamburger icon on desktop
+            menuIcon.style.display = 'none';
+            // Ensure mobile menu is closed on desktop
+            navLinks.classList.remove("active");
+        }
+    }
+    
+    // Initial check
+    handleHamburgerVisibility();
+    
+    // Check on resize
+    window.addEventListener("resize", handleHamburgerVisibility);
+    
+    if (menuIcon) {
+        menuIcon.addEventListener("click", function () {
+            navLinks.classList.toggle("active");
+        });
+    }
+    
+    // Close menu when a link is clicked (only for mobile view)
+    navItems.forEach(item => {
+        item.addEventListener("click", function () {
+            if (window.innerWidth <= 768) {
+                navLinks.classList.remove("active");
+            }
+        });
+    });
+    
+    // Modal functionality
+    const seeMoreButtons = document.querySelectorAll('.see-more');
+    const fabIcons = document.querySelectorAll('.fab-icon');
+    const modals = document.querySelectorAll('.modal');
+    const closeButtons = document.querySelectorAll('.close-modal');
+    
+    function openModal(projectId) {
+        const modal = document.getElementById(`modal-${projectId}`);
+        if (modal) {
+            modal.style.display = 'block';
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
+        }
+    }
+    
+    function closeModal(modal) {
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+    }
+    
+    seeMoreButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const projectId = this.getAttribute('data-project');
+            openModal(projectId);
+        });
+    });
+    
+    fabIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            const projectId = this.getAttribute('data-project');
+            openModal(projectId);
+        });
+    });
+    
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const modal = this.closest('.modal');
+            closeModal(modal);
+        });
+    });
+    
+    // Close modal when clicking outside the content
+    window.addEventListener('click', function(e) {
+        modals.forEach(modal => {
+            if (e.target === modal) {
+                closeModal(modal);
+            }
+        });
+    });
+    
+    // Ensure menu stays open on larger screens
+    window.addEventListener("resize", function () {
+        if (window.innerWidth >= 1024) {
+            navLinks.classList.remove("active");
+        }
+    });
+    
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+    
+    // Card entrance animations
+    const cards = document.querySelectorAll('.skill-category, .service-card, .portfolio-card, .fab-icon');
+    
+    function checkScroll() {
+        cards.forEach(card => {
+            const cardTop = card.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (cardTop < windowHeight * 0.85) {
+                card.classList.add('visible');
+            }
+        });
+    }
+    
+    // Initial check
+    checkScroll();
+    
+    // Check on scroll
+    window.addEventListener('scroll', checkScroll);
+});
+    </script>
   </body>
 </html>
